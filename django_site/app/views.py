@@ -9,11 +9,15 @@ import json
 
 
 class HomePage(TemplateView):
-    template_name = "app/home.html"
+    template_name = "app/home-page.html"
+
+
+class FindRestaurantView(LoginRequiredMixin, TemplateView):
+    template_name = "app/find-restaurant.html"
 
 
 class UserTasks(TemplateResponseMixin, ContextMixin, View):
-    template_name = "app/show_tasks.html"
+    template_name = "app/show-tasks.html"
 
     def get(self, request):
         context = self.get_context_data()
