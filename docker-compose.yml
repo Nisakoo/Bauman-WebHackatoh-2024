@@ -9,8 +9,6 @@ services:
     build:
       context: .
       dockerfile: ./dockerfiles/TimeToEatDockerfile
-    networks:
-      - backend
 
   ranged-model:
     image: ranged-model-image
@@ -22,8 +20,3 @@ services:
     build:
       context: .
       dockerfile: ./dockerfiles/RangedModelDockerfile
-    networks:
-      - backend
-
-networks:
-  backend:
