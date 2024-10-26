@@ -1,16 +1,12 @@
 {% extends 'generic/base.html' %}
 
-{% block title %}Registration{% endblock %}
+{% block title %}Sign Up{% endblock %}
 
 {% block content %}
-<h2>Register</h2>
-
+<h2>Sign up</h2>
 <form method="post">
-    {% csrf_token %}
-    {{form}}
-    <input type="submit" value="Register">
+  {% csrf_token %}
+  {{ form }}
+  <button type="submit">Sign Up</button>
 </form>
-
-<a href="{% url 'login' %}">Back to login</a>
-<a href="{% url 'home' %}">Back to Home</a>
 {% endblock %}
