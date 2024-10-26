@@ -3,6 +3,7 @@
 {% block title %}Вход в систему{% endblock %}
 
 {% block content %}
+
 {% if user.is_authenticated %}
 <h1 style="text-align: center;">Добро пожаловать, {{ user.username }}!</h1>
 <form style="text-align: center;" action="{% url 'logout' %}" method="post">

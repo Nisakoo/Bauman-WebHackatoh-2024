@@ -1,0 +1,22 @@
+{% extends 'generic/base.html' %}
+
+{% block content %}
+
+<form action="{{ requests.path }}" method="get">
+    <input type="text" name="calendar_url" />
+    <input class="btn btn-primary" type="submit" value="Получить события" />
+</form>
+
+{% if events %}
+<h2>Ваши события: </h2>
+
+{% for event in events %}
+<h5>{{ event.name }}</h5>
+<ul>
+    <li>Локация: {{ event.location|default_if_none:"Не указана" }}</li>
+    <li>Начало: {{ event.begin }}</li>
+    <li>Окончание: {{ event.end }}</li>
+</ul>
+{% endfor %}
+{% endif %}
+{% endblock %}
