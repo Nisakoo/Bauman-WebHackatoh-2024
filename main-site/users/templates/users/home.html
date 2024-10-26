@@ -1,11 +1,21 @@
-<!DOCTYPE html>
-<html lang="ru">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Home</title>
-</head>
-<body>
-    <h5 style="text-align: center;">Страница регистрации - Home</h5>
-</body>
-</html>
+{% extends 'generic/base.html' %}
+
+{% block title %} Home {% endblock %}
+
+{% block content %}
+    <div style="text-align: center;">
+        <h1>Hello, {{ user.username|default:'Guest' }}</h1>
+
+        <p> Welcome to the Our site</p>
+
+        <div>
+        {% if user.is_authenticated %}
+            <a href="{% url 'logout' %}">Logout</a>
+
+        {% else %}
+            <a href="{% url 'signup' %}">Sign Up</a>
+            <a href="{% url 'login' %}">Login</a>
+        {% endif %}
+        </div>
+    </div>
+{% endblock %}
