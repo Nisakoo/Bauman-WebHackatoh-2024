@@ -2,9 +2,12 @@ from django.shortcuts import render
 from django.urls import reverse_lazy
 from django.contrib.auth.forms import UserCreationForm
 from django.views.generic.edit import CreateView
+from django.views.generic import TemplateView
 
-def home(request):
-    return render(request,"users/home.html")
+
+class HomePage(TemplateView):
+    template_name = "users/home.html"
+
 
 class SignUp(CreateView):
     form_class = UserCreationForm
