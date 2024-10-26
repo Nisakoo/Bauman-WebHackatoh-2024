@@ -19,7 +19,7 @@ class UserTasks(TemplateResponseMixin, ContextMixin, View):
         context = self.get_context_data()
 
         if "calendar_url" in request.GET:
-            data = json.loads(requests.get(f"http://0.0.0.0:8125/events/get?calendar_url={request.GET['calendar_url']}").text)
+            data = json.loads(requests.get(f"http://ranged-model:8125/events/get?calendar_url={request.GET['calendar_url']}").text)
             context["events"] = data
 
         return super().render_to_response(context)
