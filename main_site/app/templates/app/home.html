@@ -10,7 +10,7 @@
   <button type="submit"> <h3>Выход</h3></button>
 </form>
 {% else %}
-<h2 style="text-align: center;">Вы не зарегистрированы!</h2>
+<h2 style="text-align: center;">TIME TO EAT</h2>
 <form style="text-align: center;" action="{% url 'login' %}" method="post">
   {% csrf_token %}
   <button type="submit"> <h3>Вход</h3></button>
