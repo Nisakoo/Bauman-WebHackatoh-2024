@@ -17,6 +17,13 @@ class HomePage(TemplateView):
 class FindRestaurantView(LoginRequiredMixin, TemplateView):
     template_name = "app/find-restaurant.html"
 
+    def post(self, request, *args, **kwargs):
+        data = UserData.objects.filter(user=request.user)[0]
+        data.calendar = request.POST["calendar_url"]
+        data.save()
+
+        return super().render_to_response(self.get_context_data())
+
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
 
@@ -24,10 +31,15 @@ class FindRestaurantView(LoginRequiredMixin, TemplateView):
             data = UserData(user=self.request.user)
             data.save()
         else:
-            data = UserData.objects.filter(user=self.request.user)
+            data = UserData.objects.get(user=self.request.user)
 
         context["user_data"] = data
-        print(data.calendar)
+
+        if data.calendar:
+            events = json.loads(
+                requests.post("http://ranged-model:8125/events/get", json={"calendar_url": data.calendar}).text
+            )
+            context["events"] = events["events"]
 
         return context
 

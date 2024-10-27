@@ -52,7 +52,7 @@ def main():
     #     print(f'Ресторан: {name}, Адрес: {address}')
 
 def get_geocode(**kwargs):
-    base_url = "https://catalog.api.2gis.com/3.0/items/geocode"
+    base_url = "https://catalog.api.2gis.com/3.0/item/4504235282645692"
     api_key = "b958d355-454a-4241-8a6d-2b86acdae86f"
 
     kwargs.update(dict(key=api_key))
@@ -62,5 +62,6 @@ def get_geocode(**kwargs):
 
 
 if __name__ == "__main__":
+    print(get_geocode(fields="fields=item.rating"))
     print(get_geocode(q="Москва, 2-я Бауманская 5с1", fields="fields=items.point,items.geometry.centroid"))
     # main()

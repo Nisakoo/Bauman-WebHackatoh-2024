@@ -5,9 +5,21 @@
 <h2>Привет, {{ request.user.username }}!</h2>
 
 {% if user_data.calendar %}
-<h2>Ваш календарь: {{ user_data.calendar }}</h2>
+{% for event in events %}
+<h5>{{ event.name }}</h5>
+<ul>
+    <li>Локация: {{ event.location|default_if_none:"Не указана" }}</li>
+    <li>Начало: {{ event.begin }}</li>
+    <li>Окончание: {{ event.end }}</li>
+</ul>
+{% endfor %}
 {% else %}
 <h2>Пожалуйста, укажите календарь!</h2>
+<form method="post">
+    {% csrf_token %}
+    <input type="text" name="calendar_url">
+    <button type="submit">Сохранить</button>
+</form>
 {% endif %}
 
 <form action="{% url 'logout' %}" method="post">
