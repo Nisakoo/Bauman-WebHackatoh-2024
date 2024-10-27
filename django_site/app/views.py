@@ -6,6 +6,7 @@ from django.views import View
 from users.models import UserData
 from django.contrib.auth.models import User
 
+from datetime import datetime, timezone
 import requests
 import json
 
@@ -38,8 +39,27 @@ class FindRestaurantView(LoginRequiredMixin, TemplateView):
         if data.calendar:
             events = json.loads(
                 requests.post("http://ranged-model:8125/events/get", json={"calendar_url": data.calendar}).text
-            )
-            context["events"] = events["events"]
+            )["events"]
+            context["events"] = events
+
+            # current_time = datetime.now(timezone.utc)
+            # day_end = datetime.now(timezone.utc).replace(hour=23, minute=59, second=59, microsecond=999)
+
+            # relaxing_time = list()
+
+            # if events:
+            #     if current_time <= datetime.fromtimestamp(int(events[1]["begin"]), tz=timezone.utc):
+            #         relaxing_time.append(current_time - datetime.fromtimestamp(int(events[1]["begin"]), tz=timezone.utc))
+
+            #     if day_end >= datetime.fromtimestamp(int(events[-1]["end"]), tz=timezone.utc):
+            #         relaxing_time.append(day_end - datetime.fromtimestamp(int(events[-1]["end"]), tz=timezone.utc))
+
+            #     if len(events) >= 2:
+            #         for i in range(0, len(events) - 1):
+            #             relaxing_time.append(datetime.fromtimestamp(int(events[i]["end"]), tz=timezone.utc) - datetime.fromtimestamp(int(events[i+1]["begin"]), tz=timezone.utc))
+
+            #     for t in relaxing_time:
+            #         print(t.seconds // 60)
 
             locations = json.loads(
                 requests.post("http://ranged-model:8125/locations/get", json={"location": "2-я Бауманская, 5с1"}).text
