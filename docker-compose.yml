@@ -14,7 +14,7 @@ services:
     image: ranged-model-image
     container_name: ranged-model
     restart: always
-    env_file: ./ranged_model/.env
+    env_file: ./ranking_model/.env
     ports:
       - 8125:8125
     build:
