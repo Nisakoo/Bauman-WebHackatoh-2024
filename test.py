@@ -62,5 +62,5 @@ def get_geocode(**kwargs):
 
 
 if __name__ == "__main__":
-    print(get_geocode(q="", fields="fields=items.point,items.geometry.centroid"))
+    print(get_geocode(q="Москва, 2-я Бауманская 5с1", fields="fields=items.point,items.geometry.centroid"))
     # main()
