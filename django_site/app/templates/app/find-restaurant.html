@@ -1,8 +1,17 @@
 {% extends 'generic/base.html' %}
 
 {% block content %}
+
+<h2>Привет, {{ request.user.username }}!</h2>
+
+{% if user_data.calendar %}
+<h2>Ваш календарь: {{ user_data.calendar }}</h2>
+{% else %}
+<h2>Пожалуйста, укажите календарь!</h2>
+{% endif %}
+
 <form action="{% url 'logout' %}" method="post">
     {% csrf_token %}
-    <button type="submit">Log Out</button>
+    <button class="btn btn-danger" type="submit">Log Out</button>
 </form>
 {% endblock %}
