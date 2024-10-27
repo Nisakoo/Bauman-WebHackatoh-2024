@@ -41,6 +41,28 @@ class FindRestaurantView(LoginRequiredMixin, TemplateView):
             )
             context["events"] = events["events"]
 
+            locations = json.loads(
+                requests.post("http://ranged-model:8125/locations/get", json={"location": "2-я Бауманская, 5с1"}).text
+            )
+
+            x = list()
+
+            for _, value in locations.items():
+                x.append(value)
+
+            ranking = json.loads(
+                requests.post("http://ranged-model:8125/model/ranking", json={
+                    "x": x,
+                    "weights": [2.16865241, 0.19021977, 0.51186798, 0.76699442, 1.16699469]
+                }).text
+            )["ranked"]
+
+            restik = list()
+            for rank in ranking:
+                restik.append(list(locations.keys())[rank])
+
+            context["restiks"] = restik
+
         return context
 
 

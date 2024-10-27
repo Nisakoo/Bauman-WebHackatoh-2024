@@ -13,6 +13,14 @@
     <li>Окончание: {{ event.end }}</li>
 </ul>
 {% endfor %}
+
+<h2>Список ресторанов: </h2>
+<ul>
+    {% for restik in restiks %}
+        <li>{{ restik }}</li>
+    {% endfor %}
+</ul>
+
 {% else %}
 <h2>Пожалуйста, укажите календарь!</h2>
 <form method="post">
