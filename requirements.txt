@@ -5,3 +5,4 @@ fastapi==0.115.3
 uvicorn==0.32.0
 ics==0.7.2
 requests==2.32.3
+numpy==2.1.2
