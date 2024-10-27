@@ -1,6 +1,6 @@
 ARG PYTHON_VERSION=3.12
 
-FROM python:${PYTHON_VERSION}-slim AS ranged-model-compiler
+FROM python:${PYTHON_VERSION}-slim AS ranking-model-compiler
 
 ENV PYTHONDONTWRITEBYTECODE=1
 ENV PYTHONUNBUFFERED=1
@@ -14,16 +14,16 @@ COPY requirements.txt ./
 RUN pip install -Ur requirements.txt
 
 
-FROM python:${PYTHON_VERSION}-slim AS ranged-model-runner
+FROM python:${PYTHON_VERSION}-slim AS ranking-model-runner
 
 ENV PYTHONDONTWRITEBYTECODE=1
 ENV PYTHONUNBUFFERED=1
 
-WORKDIR /ranged-model
-COPY --from=ranged-model-compiler /app/.venv ./.venv
+WORKDIR /ranking-model
+COPY --from=ranking-model-compiler /app/.venv ./.venv
 
-ENV PATH="/ranged-model/.venv/bin:$PATH"
-COPY ./ranged_model ./
+ENV PATH="/ranking-model/.venv/bin:$PATH"
+COPY ./ranking_model ./
 
 EXPOSE 8125
 

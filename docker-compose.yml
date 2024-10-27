@@ -11,12 +11,12 @@ services:
       dockerfile: ./dockerfiles/TimeToEatDockerfile
 
   ranged-model:
-    image: ranged-model-image
-    container_name: ranged-model
+    image: ranking-model-image
+    container_name: ranking-model
     restart: always
     env_file: ./ranking_model/.env
     ports:
       - 8125:8125
     build:
       context: .
-      dockerfile: ./dockerfiles/RangedModelDockerfile
+      dockerfile: ./dockerfiles/RankingModelDockerfile
