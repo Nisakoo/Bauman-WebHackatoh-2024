@@ -1,0 +1,44 @@
+{% extends 'generic/base.html' %}
+
+{% load widget_tweaks %}
+
+{% block title %}Вход{% endblock %}
+
+{% block content %}
+
+<div class="row">
+  <div class="col"></div>
+  <div class="col-md-6">
+    <h2 class="my-5">Вход</h2>
+
+    <form method="post">
+      {% csrf_token %}
+
+      <div class="input-group mb-3">
+        <span class="input-group-text">
+          {{ form.username.label_tag }}
+        </span>
+        {% render_field form.username class+="form-control" %}
+      </div>
+
+      <div class="input-group mb-3">
+        <span class="input-group-text">
+          {{ form.password.label_tag }}
+        </span>
+        {% render_field form.password class+="form-control" %}
+      </div>
+
+      <div class="my-5">
+        <button type="submit" class="btn btn-success">
+          Вход
+        </button>
+        <a class="btn btn-primary" href="{% url 'signup' %}" role="button">
+          Регистрация
+        </a>
+      </div>
+    </form>
+  </div>
+  <div class="col"></div>
+</div>
+
+{% endblock %}

@@ -1,6 +1,7 @@
 Django==5.1.2
+django-widget-tweaks==1.5.0
 python-dotenv==1.0.1
 fastapi==0.115.3
-fastapi[standard]
+uvicorn==0.32.0
 ics==0.7.2
 requests==2.32.3

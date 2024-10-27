@@ -1,0 +1,12 @@
+{% extends 'generic/base.html' %}
+
+{% block title %}It's time to eat!{% endblock %}
+
+{% block content %}
+
+<div>
+  <h3>It's time to...</h3>
+  <a class="btn btn-primary" href="{% url 'main:find' %}" role="button">EAT!</a>
+</div>
+
+{% endblock %}

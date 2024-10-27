@@ -1,0 +1,30 @@
+ARG PYTHON_VERSION=3.12
+
+FROM python:${PYTHON_VERSION}-slim AS django-compiler
+
+ENV PYTHONDONTWRITEBYTECODE=1
+ENV PYTHONUNBUFFERED=1
+
+WORKDIR /app
+
+RUN python -m venv ./.venv
+ENV PATH="/app/.venv/bin:$PATH"
+
+COPY requirements.txt ./
+RUN pip install -Ur requirements.txt
+
+
+FROM python:${PYTHON_VERSION}-slim AS django-runner
+
+ENV PYTHONDONTWRITEBYTECODE=1
+ENV PYTHONUNBUFFERED=1
+
+WORKDIR /django-site
+COPY --from=django-compiler /app/.venv ./.venv
+
+ENV PATH="/django-site/.venv/bin:$PATH"
+COPY ./django_site ./
+
+EXPOSE 8000
+
+CMD ["python", "manage.py", "runserver", "0.0.0.0:8000"]

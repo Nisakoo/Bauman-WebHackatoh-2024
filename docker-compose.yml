@@ -1,0 +1,22 @@
+services:
+  django-site:
+    image: time-to-eat-image
+    container_name: time-to-eat
+    restart: always
+    env_file: ./django_site/.env
+    ports:
+      - 8000:8000
+    build:
+      context: .
+      dockerfile: ./dockerfiles/TimeToEatDockerfile
+
+  ranged-model:
+    image: ranged-model-image
+    container_name: ranged-model
+    restart: always
+    env_file: ./ranged_model/.env
+    ports:
+      - 8125:8125
+    build:
+      context: .
+      dockerfile: ./dockerfiles/RangedModelDockerfile
